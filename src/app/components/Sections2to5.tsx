@@ -6,7 +6,7 @@ const S = {
   cyan: "#FFF7E8",
   yellow: "#F59E0B",
   gray: "#334155",
-  white: "#ffffff",
+  white: "#FFFCF5",
 };
 
 function SectionTitle({ tag, title, sub }: { tag: string; title: string; sub?: string }) {
@@ -17,6 +17,32 @@ function SectionTitle({ tag, title, sub }: { tag: string; title: string; sub?: s
       </span>
       <h2 style={{ color: S.blue, fontSize: "26px", fontWeight: 800, margin: "0 0 12px", lineHeight: 1.3 }}>{title}</h2>
       {sub && <p style={{ color: "#6B7280", fontSize: "15px", lineHeight: 1.65, maxWidth: "620px", margin: "0 auto" }}>{sub}</p>}
+    </div>
+  );
+}
+
+function LearningSummary({ points, nextHref, nextLabel }: { points: string[]; nextHref: string; nextLabel: string }) {
+  return (
+    <div style={{ marginTop: "26px", padding: "16px 18px", borderRadius: "12px", border: "1px solid #dbe3ef", background: "#fff" }}>
+      <p style={{ margin: "0 0 10px", fontSize: "13px", fontWeight: 800, color: S.blue, textTransform: "uppercase", letterSpacing: "0.8px" }}>
+        Ý chính cần nhớ
+      </p>
+      <div style={{ display: "grid", gap: "6px", marginBottom: "12px" }}>
+        {points.map((point) => (
+          <div key={point} style={{ display: "flex", gap: "8px", alignItems: "flex-start" }}>
+            <div style={{ marginTop: "6px", width: "6px", height: "6px", borderRadius: "999px", background: "#F59E0B", flexShrink: 0 }} />
+            <span style={{ fontSize: "14px", color: S.gray, lineHeight: 1.5 }}>{point}</span>
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <a href={nextHref} style={{ fontSize: "13px", fontWeight: 700, color: "#0F172A", background: "rgba(245,158,11,0.18)", border: "1px solid rgba(245,158,11,0.4)", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
+          Tiếp theo: {nextLabel}
+        </a>
+        <a href="#top" style={{ fontSize: "13px", fontWeight: 700, color: "#475569", border: "1px solid #d1d5db", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
+          Quay lại đầu trang
+        </a>
+      </div>
     </div>
   );
 }
@@ -76,6 +102,15 @@ export function Section2() {
             </motion.div>
           ))}
         </div>
+        <LearningSummary
+          points={[
+            "Uy tín và độ nổi tiếng không thay thế cho bằng chứng.",
+            "Cảm xúc đám đông có thể làm sai lệch nhận thức ban đầu.",
+            "Cần đặt câu hỏi trước khi chấp nhận lời khuyên trên mạng.",
+          ]}
+          nextHref="#triet-hoc"
+          nextLabel="Góc nhìn triết học"
+        />
       </div>
     </section>
   );
@@ -172,6 +207,15 @@ export function Section3() {
             </div>
           </motion.div>
         </div>
+        <LearningSummary
+          points={[
+            "Ý thức bao gồm tri thức, tình cảm và ý chí.",
+            "Niềm tin được tạo bởi cả tri thức lẫn trải nghiệm.",
+            "Nhận thức cần được soi chiếu bằng lý trí và thực tiễn.",
+          ]}
+          nextHref="#niem-tin"
+          nextLabel="Niềm tin và cảm xúc"
+        />
       </div>
     </section>
   );
@@ -307,6 +351,15 @@ export function Section4() {
             ))}
           </div>
         </div>
+        <LearningSummary
+          points={[
+            "Niềm tin xã hội và cảm xúc tập thể dễ tác động hành vi.",
+            "Lan truyền mạnh không đồng nghĩa với thông tin đúng.",
+            "Kiểm chứng độc lập là bước bảo vệ nhận thức.",
+          ]}
+          nextHref="#nhan-thuc"
+          nextLabel="Nhận thức luận"
+        />
       </div>
     </section>
   );
@@ -446,6 +499,15 @@ export function Section5() {
             <Brain size={16} color="#fff" />
           </div>
         </motion.div>
+        <LearningSummary
+          points={[
+            "Nhận thức cảm tính nhanh nhưng dễ bị ảnh hưởng bởi bề ngoài.",
+            "Nhận thức lý tính giúp phân tích bản chất và điều kiện.",
+            "Cần kết hợp hai giai đoạn và đối chiếu với thực tiễn.",
+          ]}
+          nextHref="#vi-du"
+          nextLabel="Ví dụ thực tế"
+        />
       </div>
     </section>
   );

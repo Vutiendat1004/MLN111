@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { Section2, Section3, Section4, Section5 } from "./components/Sections2to5";
@@ -6,10 +7,37 @@ import { Reveal } from "./components/Effects";
 
 export default function App() {
   const sections = [HeroSection, Section2, Section3, Section4, Section5, Section6, Section7, Section8, Section9, Footer];
+  const [activeHref, setActiveHref] = useState<string>("#van-de");
+
+  useEffect(() => {
+    const trackedSections = ["#van-de", "#triet-hoc", "#niem-tin", "#nhan-thuc", "#vi-du", "#thuc-tien", "#checklist"];
+    const observers: IntersectionObserver[] = [];
+
+    trackedSections.forEach((href) => {
+      const element = document.querySelector(href);
+      if (!element) return;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveHref(href);
+            }
+          });
+        },
+        { rootMargin: "-45% 0px -45% 0px", threshold: 0.01 },
+      );
+      observer.observe(element);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
 
   return (
-    <div style={{ fontFamily: "'Be Vietnam Pro', 'Segoe UI', sans-serif", background: "#ffffff", minHeight: "100vh" }}>
-      <Navbar />
+    <div id="top" style={{ fontFamily: "'Be Vietnam Pro', 'Segoe UI', sans-serif", background: "linear-gradient(180deg, #0F172A 0%, #111827 100%)", minHeight: "100vh" }}>
+      <Navbar activeHref={activeHref} />
       {sections.map((Section, index) => (
         <Reveal key={Section.name} delay={Math.min(index * 0.04, 0.32)}>
           <Section />

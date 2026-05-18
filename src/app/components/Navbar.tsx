@@ -11,7 +11,11 @@ const links = [
   { label: "Checklist", href: "#checklist" },
 ];
 
-export function Navbar() {
+type NavbarProps = {
+  activeHref?: string;
+};
+
+export function Navbar({ activeHref }: NavbarProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -41,21 +45,22 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               style={{
-                color: "rgba(255,255,255,0.75)",
+                color: activeHref === l.href ? "#FDE68A" : "rgba(255,255,255,0.75)",
                 fontSize: "12.5px",
                 fontWeight: 500,
                 textDecoration: "none",
                 padding: "5px 10px",
                 borderRadius: "6px",
                 transition: "all 0.2s",
+                background: activeHref === l.href ? "rgba(245,158,11,0.24)" : "transparent",
               }}
               onMouseEnter={(e) => {
                 (e.target as HTMLElement).style.color = "#fff";
                 (e.target as HTMLElement).style.background = "rgba(245,158,11,0.24)";
               }}
               onMouseLeave={(e) => {
-                (e.target as HTMLElement).style.color = "rgba(255,255,255,0.75)";
-                (e.target as HTMLElement).style.background = "transparent";
+                (e.target as HTMLElement).style.color = activeHref === l.href ? "#FDE68A" : "rgba(255,255,255,0.75)";
+                (e.target as HTMLElement).style.background = activeHref === l.href ? "rgba(245,158,11,0.24)" : "transparent";
               }}
             >
               {l.label}
@@ -81,7 +86,7 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              style={{ display: "block", color: "rgba(255,255,255,0.85)", fontSize: "14px", fontWeight: 500, textDecoration: "none", padding: "10px 0", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+              style={{ display: "block", color: activeHref === l.href ? "#FDE68A" : "rgba(255,255,255,0.85)", fontSize: "14px", fontWeight: 500, textDecoration: "none", padding: "10px 0", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
             >
               {l.label}
             </a>

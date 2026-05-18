@@ -1,4 +1,4 @@
-import { AlertTriangle, BookOpen, CheckSquare, DollarSign, FlaskConical, Heart, Lightbulb, Quote, Scale, Search, Shield, Square, TrendingUp, XCircle } from "lucide-react";
+import { AlertTriangle, BookOpen, Brain, CheckSquare, DollarSign, FlaskConical, Heart, Lightbulb, Quote, Scale, Search, Shield, Square, TrendingUp, XCircle } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
 const S = {
@@ -6,7 +6,7 @@ const S = {
   cyan: "#FFF7E8",
   yellow: "#F59E0B",
   gray: "#334155",
-  white: "#ffffff",
+  white: "#FFFCF5",
 };
 
 function SectionTitle({ tag, title, sub }: { tag: string; title: string; sub?: string }) {
@@ -17,6 +17,32 @@ function SectionTitle({ tag, title, sub }: { tag: string; title: string; sub?: s
       </span>
       <h2 style={{ color: S.blue, fontSize: "26px", fontWeight: 800, margin: "0 0 12px", lineHeight: 1.3 }}>{title}</h2>
       {sub && <p style={{ color: "#6B7280", fontSize: "15px", lineHeight: 1.65, maxWidth: "620px", margin: "0 auto" }}>{sub}</p>}
+    </div>
+  );
+}
+
+function LearningSummary({ points, nextHref, nextLabel }: { points: string[]; nextHref: string; nextLabel: string }) {
+  return (
+    <div style={{ marginTop: "26px", padding: "16px 18px", borderRadius: "12px", border: "1px solid #dbe3ef", background: "#fff" }}>
+      <p style={{ margin: "0 0 10px", fontSize: "13px", fontWeight: 800, color: S.blue, textTransform: "uppercase", letterSpacing: "0.8px" }}>
+        Ý chính cần nhớ
+      </p>
+      <div style={{ display: "grid", gap: "6px", marginBottom: "12px" }}>
+        {points.map((point) => (
+          <div key={point} style={{ display: "flex", gap: "8px", alignItems: "flex-start" }}>
+            <div style={{ marginTop: "6px", width: "6px", height: "6px", borderRadius: "999px", background: "#F59E0B", flexShrink: 0 }} />
+            <span style={{ fontSize: "14px", color: S.gray, lineHeight: 1.5 }}>{point}</span>
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <a href={nextHref} style={{ fontSize: "13px", fontWeight: 700, color: "#0F172A", background: "rgba(245,158,11,0.18)", border: "1px solid rgba(245,158,11,0.4)", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
+          Tiếp theo: {nextLabel}
+        </a>
+        <a href="#top" style={{ fontSize: "13px", fontWeight: 700, color: "#475569", border: "1px solid #d1d5db", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
+          Quay lại đầu trang
+        </a>
+      </div>
     </div>
   );
 }
@@ -107,6 +133,15 @@ export function Section6() {
             </motion.div>
           ))}
         </div>
+        <LearningSummary
+          points={[
+            "Mỗi lời khuyên cần đối chiếu với bối cảnh cá nhân.",
+            "Độ nổi tiếng không đảm bảo tính khoa học của nội dung.",
+            "Cần kiểm tra nguồn và rủi ro trước khi áp dụng.",
+          ]}
+          nextHref="#thuc-tien"
+          nextLabel="Thực tiễn và chân lý"
+        />
       </div>
     </section>
   );
@@ -224,6 +259,15 @@ export function Section7() {
             </div>
           </motion.div>
         </div>
+        <LearningSummary
+          points={[
+            "Thực tiễn là tiêu chuẩn đánh giá tính đúng đắn của tri thức.",
+            "Danh tiếng và lượt thích không phải bằng chứng chân lý.",
+            "Cần ưu tiên dữ liệu thực tế và nguồn độc lập.",
+          ]}
+          nextHref="#checklist"
+          nextLabel="Checklist kiểm chứng"
+        />
       </div>
     </section>
   );
@@ -318,6 +362,15 @@ export function Section8() {
             <strong style={{ color: "#fff" }}>Tư duy phê phán</strong> không có nghĩa là không tin ai — mà là biết cách đặt câu hỏi đúng và kiểm chứng thông tin một cách chủ động, khoa học.
           </p>
         </motion.div>
+        <LearningSummary
+          points={[
+            "Đặt câu hỏi đúng giúp tránh tiếp nhận thông tin cảm tính.",
+            "So sánh nhiều nguồn độc lập để xác thực nội dung.",
+            "Đánh giá rủi ro trước khi biến thông tin thành hành động.",
+          ]}
+          nextHref="#top"
+          nextLabel="Kết luận"
+        />
       </div>
     </section>
   );
@@ -377,9 +430,9 @@ export function Section9() {
         {/* 3 takeaways */}
         <div style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>
           {[
-            { icon: "🧠", label: "Tư duy phê phán" },
-            { icon: "🔬", label: "Kiểm chứng thực tiễn" },
-            { icon: "⚖️", label: "Chân lý khách quan" },
+            { icon: <Brain size={18} color="rgba(255,255,255,0.82)" />, label: "Tư duy phê phán" },
+            { icon: <FlaskConical size={18} color="rgba(255,255,255,0.82)" />, label: "Kiểm chứng thực tiễn" },
+            { icon: <Scale size={18} color="rgba(255,255,255,0.82)" />, label: "Chân lý khách quan" },
           ].map(({ icon, label }, i) => (
             <motion.div
               key={label}
@@ -389,10 +442,15 @@ export function Section9() {
               viewport={{ once: true, amount: 1 }}
               transition={{ duration: 0.3, delay: i * 0.08 }}
             >
-              <span style={{ fontSize: "18px" }}>{icon}</span>
+              <span style={{ display: "inline-flex", alignItems: "center" }}>{icon}</span>
               <span style={{ color: "#fff", fontSize: "13px", fontWeight: 700 }}>{label}</span>
             </motion.div>
           ))}
+        </div>
+        <div style={{ marginTop: "26px", display: "flex", justifyContent: "center" }}>
+          <a href="#top" style={{ fontSize: "12px", fontWeight: 700, color: "#0F172A", background: "rgba(245,158,11,0.9)", borderRadius: "999px", padding: "8px 14px", textDecoration: "none" }}>
+            Quay lại đầu trang
+          </a>
         </div>
       </div>
     </section>
