@@ -3,10 +3,10 @@ import { motion, useReducedMotion } from "motion/react";
 
 const S = {
   blue: "#0F172A",
-  cyan: "#FFF7E8",
-  yellow: "#F59E0B",
+  cyan: "#FFF8E6",
+  yellow: "#EAB308",
   gray: "#334155",
-  white: "#FFFCF5",
+  white: "#FFF8E6",
 };
 
 function SectionTitle({ tag, title, sub }: { tag: string; title: string; sub?: string }) {
@@ -30,13 +30,13 @@ function LearningSummary({ points, nextHref, nextLabel }: { points: string[]; ne
       <div style={{ display: "grid", gap: "6px", marginBottom: "12px" }}>
         {points.map((point) => (
           <div key={point} style={{ display: "flex", gap: "8px", alignItems: "flex-start" }}>
-            <div style={{ marginTop: "6px", width: "6px", height: "6px", borderRadius: "999px", background: "#F59E0B", flexShrink: 0 }} />
+            <div style={{ marginTop: "6px", width: "6px", height: "6px", borderRadius: "999px", background: "#EAB308", flexShrink: 0 }} />
             <span style={{ fontSize: "14px", color: S.gray, lineHeight: 1.5 }}>{point}</span>
           </div>
         ))}
       </div>
       <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        <a href={nextHref} style={{ fontSize: "13px", fontWeight: 700, color: "#0F172A", background: "rgba(245,158,11,0.18)", border: "1px solid rgba(245,158,11,0.4)", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
+        <a href={nextHref} style={{ fontSize: "13px", fontWeight: 700, color: "#0F172A", background: "rgba(234,179,8,0.2)", border: "1px solid rgba(234,179,8,0.4)", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
           Tiếp theo: {nextLabel}
         </a>
         <a href="#top" style={{ fontSize: "13px", fontWeight: 700, color: "#475569", border: "1px solid #d1d5db", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
@@ -385,7 +385,7 @@ export function Section9() {
       <div style={{ position: "absolute", bottom: -80, left: -80, width: 300, height: 300, borderRadius: "50%", background: "rgba(255,255,255,0.04)", pointerEvents: "none" }} />
 
       <div style={{ maxWidth: "820px", margin: "0 auto", textAlign: "center", position: "relative" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(245,158,11,0.14)", border: "1px solid rgba(245,158,11,0.38)", borderRadius: "20px", padding: "5px 16px", marginBottom: "24px" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(234,179,8,0.14)", border: "1px solid rgba(234,179,8,0.38)", borderRadius: "20px", padding: "5px 16px", marginBottom: "24px" }}>
           <Lightbulb size={14} color="#FDE68A" />
           <span style={{ fontSize: "11px", color: "#FDE68A", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase" }}>Kết luận</span>
         </div>
@@ -393,7 +393,7 @@ export function Section9() {
         <h2 style={{ color: "#fff", fontSize: "30px", fontWeight: 800, margin: "0 0 24px", lineHeight: 1.3 }}>
           Lắng nghe bằng cảm xúc,
           <br />
-          <span style={{ color: "#FCD34D" }}>nhưng tiếp nhận bằng lý trí</span>
+          <span style={{ color: "#FDE68A" }}>nhưng tiếp nhận bằng lý trí</span>
         </h2>
 
         <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "15px", lineHeight: 1.75, margin: "0 0 40px", maxWidth: "620px", marginLeft: "auto", marginRight: "auto" }}>
@@ -448,7 +448,7 @@ export function Section9() {
           ))}
         </div>
         <div style={{ marginTop: "26px", display: "flex", justifyContent: "center" }}>
-          <a href="#top" style={{ fontSize: "12px", fontWeight: 700, color: "#0F172A", background: "rgba(245,158,11,0.9)", borderRadius: "999px", padding: "8px 14px", textDecoration: "none" }}>
+          <a href="#top" style={{ fontSize: "12px", fontWeight: 700, color: "#0F172A", background: "rgba(234,179,8,0.9)", borderRadius: "999px", padding: "8px 14px", textDecoration: "none" }}>
             Quay lại đầu trang
           </a>
         </div>
@@ -460,13 +460,13 @@ export function Section9() {
 /* ===== FOOTER ===== */
 export function Footer() {
   return (
-    <footer style={{ background: "#0B1220", padding: "24px", fontFamily: "'Be Vietnam Pro', sans-serif" }}>
+    <footer style={{ background: "#1E293B", padding: "24px", fontFamily: "'Be Vietnam Pro', sans-serif" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
         <div>
           <p style={{ margin: "0 0 3px", fontSize: "13px", color: "rgba(255,255,255,0.8)", fontWeight: 600 }}>Chủ đề: Triết học Mác – Lênin | Nhận thức luận và tiêu chuẩn chân lý</p>
           <p style={{ margin: 0, fontSize: "11.5px", color: "rgba(255,255,255,0.4)" }}>Dành cho sinh viên đại học · Môn học Triết học Mác – Lênin</p>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "rgba(245,158,11,0.14)", border: "1px solid rgba(245,158,11,0.38)", borderRadius: "8px", padding: "6px 14px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "rgba(234,179,8,0.14)", border: "1px solid rgba(234,179,8,0.38)", borderRadius: "8px", padding: "6px 14px" }}>
           <Scale size={14} color="#FDE68A" />
           <span style={{ color: "#FDE68A", fontSize: "12px", fontWeight: 700 }}>Thực tiễn là tiêu chuẩn của chân lý</span>
         </div>

@@ -14,7 +14,7 @@ export function HeroSection() {
   const spotlightY = useMotionValue(200);
   const smoothSpotlightX = useSpring(spotlightX, { stiffness: 160, damping: 24, mass: 0.3 });
   const smoothSpotlightY = useSpring(spotlightY, { stiffness: 160, damping: 24, mass: 0.3 });
-  const spotlight = useMotionTemplate`radial-gradient(220px circle at ${smoothSpotlightX}px ${smoothSpotlightY}px, rgba(252,211,77,0.22), rgba(252,211,77,0.08) 38%, rgba(15,23,42,0) 72%)`;
+  const spotlight = useMotionTemplate`radial-gradient(220px circle at ${smoothSpotlightX}px ${smoothSpotlightY}px, rgba(234,179,8,0.22), rgba(234,179,8,0.08) 38%, rgba(15,23,42,0) 72%)`;
 
   return (
     <motion.section
@@ -59,7 +59,7 @@ export function HeroSection() {
             >
               Niềm tin xã hội,
               <br />
-              <span style={{ color: "#FCD34D" }}>cảm xúc tập thể</span>
+              <span style={{ color: "#FDE68A" }}>cảm xúc tập thể</span>
               <br />
               và nhận thức trong
               <br />
@@ -83,7 +83,7 @@ export function HeroSection() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  background: "#F59E0B",
+                  background: "#EAB308",
                   color: "#111827",
                   fontWeight: 700,
                   fontSize: "14px",
@@ -103,14 +103,14 @@ export function HeroSection() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  background: "rgba(245,158,11,0.14)",
+                  background: "rgba(234,179,8,0.14)",
                   color: "#FDE68A",
                   fontWeight: 600,
                   fontSize: "14px",
                   padding: "12px 22px",
                   borderRadius: "8px",
                   textDecoration: "none",
-                  border: "1px solid rgba(245,158,11,0.35)",
+                  border: "1px solid rgba(234,179,8,0.35)",
                 }}
                 whileHover={prefersReducedMotion ? undefined : { y: -2 }}
                 whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
@@ -172,7 +172,7 @@ export function HeroSection() {
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0", position: "relative", zIndex: 1 }}>
               {/* Top label */}
               <motion.div
-                style={{ background: "rgba(245,158,11,0.12)", border: "1px solid rgba(245,158,11,0.26)", borderRadius: "8px", padding: "8px 16px", marginBottom: "16px", textAlign: "center" }}
+                style={{ background: "rgba(234,179,8,0.12)", border: "1px solid rgba(234,179,8,0.26)", borderRadius: "8px", padding: "8px 16px", marginBottom: "16px", textAlign: "center" }}
                 initial={prefersReducedMotion ? undefined : { opacity: 0, y: 8 }}
                 whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.9 }}
@@ -226,7 +226,7 @@ export function HeroSection() {
                         position: "absolute",
                         inset: "-8px",
                         borderRadius: "9999px",
-                        border: "1px solid rgba(245,158,11,0.5)",
+                        border: "1px solid rgba(234,179,8,0.5)",
                       }}
                       animate={prefersReducedMotion ? undefined : { scale: [1, 1.24, 1], opacity: [0.45, 0, 0.45] }}
                       transition={prefersReducedMotion ? undefined : { duration: 2.1, repeat: Infinity, ease: "easeOut" }}
@@ -298,7 +298,7 @@ export function HeroSection() {
                           left: 0,
                           width: "40%",
                           height: "100%",
-                          background: "linear-gradient(90deg, transparent, rgba(252,211,77,0.95), transparent)",
+                          background: "linear-gradient(90deg, transparent, rgba(234,179,8,0.95), transparent)",
                         }}
                         animate={{ x: ["-120%", "260%"] }}
                         transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
@@ -319,7 +319,7 @@ export function HeroSection() {
                           right: 0,
                           width: "40%",
                           height: "100%",
-                          background: "linear-gradient(90deg, transparent, rgba(252,211,77,0.95), transparent)",
+                          background: "linear-gradient(90deg, transparent, rgba(234,179,8,0.95), transparent)",
                         }}
                         animate={{ x: ["260%", "-120%"] }}
                         transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}

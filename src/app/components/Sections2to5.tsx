@@ -3,10 +3,10 @@ import { motion, useReducedMotion } from "motion/react";
 
 const S = {
   blue: "#0F172A",
-  cyan: "#FFF7E8",
-  yellow: "#F59E0B",
+  cyan: "#FFF8E6",
+  yellow: "#EAB308",
   gray: "#334155",
-  white: "#FFFCF5",
+  white: "#FFF8E6",
 };
 
 function SectionTitle({ tag, title, sub }: { tag: string; title: string; sub?: string }) {
@@ -30,13 +30,13 @@ function LearningSummary({ points, nextHref, nextLabel }: { points: string[]; ne
       <div style={{ display: "grid", gap: "6px", marginBottom: "12px" }}>
         {points.map((point) => (
           <div key={point} style={{ display: "flex", gap: "8px", alignItems: "flex-start" }}>
-            <div style={{ marginTop: "6px", width: "6px", height: "6px", borderRadius: "999px", background: "#F59E0B", flexShrink: 0 }} />
+            <div style={{ marginTop: "6px", width: "6px", height: "6px", borderRadius: "999px", background: "#EAB308", flexShrink: 0 }} />
             <span style={{ fontSize: "14px", color: S.gray, lineHeight: 1.5 }}>{point}</span>
           </div>
         ))}
       </div>
       <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        <a href={nextHref} style={{ fontSize: "13px", fontWeight: 700, color: "#0F172A", background: "rgba(245,158,11,0.18)", border: "1px solid rgba(245,158,11,0.4)", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
+        <a href={nextHref} style={{ fontSize: "13px", fontWeight: 700, color: "#0F172A", background: "rgba(234,179,8,0.2)", border: "1px solid rgba(234,179,8,0.4)", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>
           Tiếp theo: {nextLabel}
         </a>
         <a href="#top" style={{ fontSize: "13px", fontWeight: 700, color: "#475569", border: "1px solid #d1d5db", borderRadius: "999px", padding: "7px 13px", textDecoration: "none" }}>

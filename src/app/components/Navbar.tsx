@@ -9,6 +9,7 @@ const links = [
   { label: "Ví dụ", href: "#vi-du" },
   { label: "Thực tiễn", href: "#thuc-tien" },
   { label: "Checklist", href: "#checklist" },
+  { label: "Truth Hunter", href: "#truth-hunter" },
 ];
 
 type NavbarProps = {
@@ -24,7 +25,7 @@ export function Navbar({ activeHref }: NavbarProps) {
         position: "sticky",
         top: 0,
         zIndex: 100,
-        background: "rgba(15,23,42,0.96)",
+        background: "rgba(30,41,59,0.96)",
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)",
         fontFamily: "'Be Vietnam Pro', sans-serif",
@@ -32,8 +33,8 @@ export function Navbar({ activeHref }: NavbarProps) {
     >
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "60px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{ background: "rgba(245,158,11,0.18)", border: "1px solid rgba(245,158,11,0.45)", borderRadius: "8px", padding: "6px" }}>
-            <BookOpen size={18} color="#FCD34D" />
+          <div style={{ background: "rgba(234,179,8,0.2)", border: "1px solid rgba(234,179,8,0.45)", borderRadius: "8px", padding: "6px" }}>
+            <BookOpen size={18} color="#FDE68A" />
           </div>
           <span style={{ color: "#fff", fontSize: "14px", fontWeight: 700, letterSpacing: "0.2px" }}>Triết học Mác – Lênin</span>
         </div>
@@ -52,15 +53,15 @@ export function Navbar({ activeHref }: NavbarProps) {
                 padding: "5px 10px",
                 borderRadius: "6px",
                 transition: "all 0.2s",
-                background: activeHref === l.href ? "rgba(245,158,11,0.24)" : "transparent",
+                background: activeHref === l.href ? "rgba(234,179,8,0.24)" : "transparent",
               }}
               onMouseEnter={(e) => {
                 (e.target as HTMLElement).style.color = "#fff";
-                (e.target as HTMLElement).style.background = "rgba(245,158,11,0.24)";
+                (e.target as HTMLElement).style.background = "rgba(234,179,8,0.24)";
               }}
               onMouseLeave={(e) => {
                 (e.target as HTMLElement).style.color = activeHref === l.href ? "#FDE68A" : "rgba(255,255,255,0.75)";
-                (e.target as HTMLElement).style.background = activeHref === l.href ? "rgba(245,158,11,0.24)" : "transparent";
+                (e.target as HTMLElement).style.background = activeHref === l.href ? "rgba(234,179,8,0.24)" : "transparent";
               }}
             >
               {l.label}
@@ -80,7 +81,7 @@ export function Navbar({ activeHref }: NavbarProps) {
 
       {/* Mobile menu */}
       {open && (
-        <div style={{ background: "#0F172A", borderTop: "1px solid rgba(255,255,255,0.1)", padding: "12px 24px 16px" }}>
+        <div style={{ background: "#1E293B", borderTop: "1px solid rgba(255,255,255,0.1)", padding: "12px 24px 16px" }}>
           {links.map((l) => (
             <a
               key={l.href}
