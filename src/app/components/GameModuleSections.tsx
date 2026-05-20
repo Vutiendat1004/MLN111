@@ -45,6 +45,7 @@ export function GameConceptSection() {
 
   const currentQuestions = questionsByStage[currentStage];
   const currentQuestion = currentQuestions[questionIndex % currentQuestions.length];
+  const showBattleUI = gameState !== "idle";
   const gameResult =
     gameState === "won"
       ? {
@@ -241,84 +242,94 @@ export function GameConceptSection() {
             </div>
           )}
 
-          <div style={{ display: "grid", gap: "10px", marginBottom: "12px" }}>
-            <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: "10px", padding: "12px 12px", display: "grid", gap: "8px" }}>
-              <div style={{ display: "grid", gap: "6px" }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", flexWrap: "wrap" }}>
-                  <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Boss HP: {bossHp}/100</p>
-                  <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Nhiễu loạn: {noise}%</p>
-                  <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Mạng: {playerHp}</p>
+          {showBattleUI ? (
+            <>
+              <div style={{ display: "grid", gap: "10px", marginBottom: "12px" }}>
+                <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderRadius: "10px", padding: "12px 12px", display: "grid", gap: "8px" }}>
+                  <div style={{ display: "grid", gap: "6px" }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", flexWrap: "wrap" }}>
+                      <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Boss HP: {bossHp}/100</p>
+                      <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Nhiễu loạn: {noise}%</p>
+                      <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Mạng: {playerHp}</p>
+                    </div>
+                    <div style={{ height: "8px", borderRadius: "999px", background: "#E2E8F0", overflow: "hidden" }}>
+                      <div style={{ width: `${bossHp}%`, height: "100%", background: "linear-gradient(90deg, #EF4444, #F97316)" }} />
+                    </div>
+                    <div style={{ height: "8px", borderRadius: "999px", background: "#E2E8F0", overflow: "hidden" }}>
+                      <div style={{ width: `${noise}%`, height: "100%", background: "linear-gradient(90deg, #7C3AED, #A855F7)" }} />
+                    </div>
+                    <p style={{ margin: 0, fontSize: "11.5px", color: "#64748B", lineHeight: 1.6 }}>
+                      Đúng: boss -{currentStage === 4 ? BOSS_DAMAGE_FINAL : BOSS_DAMAGE_NORMAL} HP · Sai: +{NOISE_PER_WRONG}% nhiễu loạn · Nhiễu loạn chạm 100%: -1 mạng và về {NOISE_RESET_AFTER_LOSE_LIFE}%.
+                    </p>
+                  </div>
+
+                  {currentQuestion && (
+                    <>
+                      <p style={{ margin: "4px 0 0", fontSize: "13px", color: "#0F172A", fontWeight: 700 }}>
+                        {displayQuestionCode(currentQuestion.id)}: {currentQuestion.question}
+                      </p>
+                      <div style={{ display: "grid", gap: "6px" }}>
+                        {(["A", "B", "C", "D"] as const).map((label) => {
+                          const eliminated = eliminatedOptions.includes(label);
+                          const selected = selectedOption === label;
+                          return (
+                            <button
+                              key={label}
+                              type="button"
+                              disabled={gameState !== "playing" || eliminated}
+                              onClick={() => setSelectedOption(label)}
+                              style={{
+                                textAlign: "left",
+                                border: selected ? "1px solid rgba(234,179,8,0.7)" : "1px solid #D1D5DB",
+                                background: eliminated ? "#F3F4F6" : selected ? "rgba(234,179,8,0.12)" : "#fff",
+                                color: eliminated ? "#9CA3AF" : "#334155",
+                                borderRadius: "8px",
+                                padding: "8px 10px",
+                                fontSize: "12.5px",
+                                cursor: gameState === "playing" && !eliminated ? "pointer" : "not-allowed",
+                              }}
+                            >
+                              {label}. {currentQuestion.options[label]} {eliminated ? "(đã loại)" : ""}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {hint && (
+                        <p style={{ margin: 0, fontSize: "12px", color: "#0F172A", background: "rgba(15,23,42,0.06)", padding: "8px 10px", borderRadius: "8px" }}>
+                          Gợi ý: {hint}
+                        </p>
+                      )}
+                    </>
+                  )}
                 </div>
-                <div style={{ height: "8px", borderRadius: "999px", background: "#E2E8F0", overflow: "hidden" }}>
-                  <div style={{ width: `${bossHp}%`, height: "100%", background: "linear-gradient(90deg, #EF4444, #F97316)" }} />
-                </div>
-                <div style={{ height: "8px", borderRadius: "999px", background: "#E2E8F0", overflow: "hidden" }}>
-                  <div style={{ width: `${noise}%`, height: "100%", background: "linear-gradient(90deg, #7C3AED, #A855F7)" }} />
-                </div>
-                <p style={{ margin: 0, fontSize: "11.5px", color: "#64748B", lineHeight: 1.6 }}>
-                  Đúng: boss -{currentStage === 4 ? BOSS_DAMAGE_FINAL : BOSS_DAMAGE_NORMAL} HP · Sai: +{NOISE_PER_WRONG}% nhiễu loạn · Nhiễu loạn chạm 100%: -1 mạng và về {NOISE_RESET_AFTER_LOSE_LIFE}%.
-                </p>
+            </div>
+
+              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "10px" }}>
+                <button type="button" onClick={useGlasses} disabled={gameState !== "playing" || items.glasses <= 0} style={itemButtonStyle(gameState === "playing" && items.glasses > 0)}>
+                  Kính Lý Tính ({items.glasses})
+                </button>
+                <button type="button" onClick={useCompass} disabled={gameState !== "playing" || items.compass <= 0} style={itemButtonStyle(gameState === "playing" && items.compass > 0)}>
+                  La Bàn Thực Tiễn ({items.compass})
+                </button>
+                <button type="button" onClick={useShield} disabled={gameState !== "playing" || items.shield <= 0} style={itemButtonStyle(gameState === "playing" && items.shield > 0)}>
+                  Lá Chắn Phản Biện ({items.shield}) {shieldActive ? "- ĐANG BẬT" : ""}
+                </button>
+                <button type="button" onClick={submitAnswer} disabled={gameState !== "playing" || !selectedOption} style={itemButtonStyle(gameState === "playing" && Boolean(selectedOption))}>
+                  Chốt đáp án
+                </button>
               </div>
 
-              {currentQuestion && (
-                <>
-                  <p style={{ margin: "4px 0 0", fontSize: "13px", color: "#0F172A", fontWeight: 700 }}>
-                    {displayQuestionCode(currentQuestion.id)}: {currentQuestion.question}
-                  </p>
-                  <div style={{ display: "grid", gap: "6px" }}>
-                    {(["A", "B", "C", "D"] as const).map((label) => {
-                      const eliminated = eliminatedOptions.includes(label);
-                      const selected = selectedOption === label;
-                      return (
-                        <button
-                          key={label}
-                          type="button"
-                          disabled={gameState !== "playing" || eliminated}
-                          onClick={() => setSelectedOption(label)}
-                          style={{
-                            textAlign: "left",
-                            border: selected ? "1px solid rgba(234,179,8,0.7)" : "1px solid #D1D5DB",
-                            background: eliminated ? "#F3F4F6" : selected ? "rgba(234,179,8,0.12)" : "#fff",
-                            color: eliminated ? "#9CA3AF" : "#334155",
-                            borderRadius: "8px",
-                            padding: "8px 10px",
-                            fontSize: "12.5px",
-                            cursor: gameState === "playing" && !eliminated ? "pointer" : "not-allowed",
-                          }}
-                        >
-                          {label}. {currentQuestion.options[label]} {eliminated ? "(đã loại)" : ""}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {hint && (
-                    <p style={{ margin: 0, fontSize: "12px", color: "#0F172A", background: "rgba(15,23,42,0.06)", padding: "8px 10px", borderRadius: "8px" }}>
-                      Gợi ý: {hint}
-                    </p>
-                  )}
-                </>
-              )}
+              <div style={{ background: "rgba(15,23,42,0.06)", border: "1px solid rgba(15,23,42,0.08)", borderRadius: "10px", padding: "10px 12px" }}>
+                <p style={{ margin: 0, fontSize: "12.5px", color: "#334155", lineHeight: 1.6 }}>{message}</p>
+              </div>
+            </>
+          ) : (
+            <div style={{ background: "rgba(15,23,42,0.06)", border: "1px dashed rgba(15,23,42,0.25)", borderRadius: "10px", padding: "12px" }}>
+              <p style={{ margin: 0, fontSize: "12.5px", color: "#334155", lineHeight: 1.6 }}>
+                Nhấn <strong>Bắt đầu chơi</strong> để hiện màn chiến đấu, thanh chỉ số và câu hỏi.
+              </p>
             </div>
-          </div>
-
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "10px" }}>
-            <button type="button" onClick={useGlasses} disabled={gameState !== "playing" || items.glasses <= 0} style={itemButtonStyle(gameState === "playing" && items.glasses > 0)}>
-              Kính Lý Tính ({items.glasses})
-            </button>
-            <button type="button" onClick={useCompass} disabled={gameState !== "playing" || items.compass <= 0} style={itemButtonStyle(gameState === "playing" && items.compass > 0)}>
-              La Bàn Thực Tiễn ({items.compass})
-            </button>
-            <button type="button" onClick={useShield} disabled={gameState !== "playing" || items.shield <= 0} style={itemButtonStyle(gameState === "playing" && items.shield > 0)}>
-              Lá Chắn Phản Biện ({items.shield}) {shieldActive ? "- ĐANG BẬT" : ""}
-            </button>
-            <button type="button" onClick={submitAnswer} disabled={gameState !== "playing" || !selectedOption} style={itemButtonStyle(gameState === "playing" && Boolean(selectedOption))}>
-              Chốt đáp án
-            </button>
-          </div>
-
-          <div style={{ background: "rgba(15,23,42,0.06)", border: "1px solid rgba(15,23,42,0.08)", borderRadius: "10px", padding: "10px 12px" }}>
-            <p style={{ margin: 0, fontSize: "12.5px", color: "#334155", lineHeight: 1.6 }}>{message}</p>
-          </div>
+          )}
         </div>
       </div>
     </section>
