@@ -14,6 +14,7 @@ const NOISE_PER_WRONG = 28;
 const NOISE_RESET_AFTER_LOSE_LIFE = 35;
 const NOISE_REDUCE_ON_STAGE_CLEAR = 25;
 const STARTING_LIVES = 3;
+const QUESTIONS_PER_STAGE = 5;
 
 export function GameConceptSection() {
   const [gameState, setGameState] = useState<"idle" | "playing" | "won" | "lost">("idle");
@@ -36,10 +37,10 @@ export function GameConceptSection() {
   const questionsByStage = useMemo(() => {
     const source = questionBank as QuestionItem[];
     return {
-      1: source.filter((item) => item.stage === 1),
-      2: source.filter((item) => item.stage === 2),
-      3: source.filter((item) => item.stage === 3),
-      4: source.filter((item) => item.stage === 4),
+      1: source.filter((item) => item.stage === 1).slice(0, QUESTIONS_PER_STAGE),
+      2: source.filter((item) => item.stage === 2).slice(0, QUESTIONS_PER_STAGE),
+      3: source.filter((item) => item.stage === 3).slice(0, QUESTIONS_PER_STAGE),
+      4: source.filter((item) => item.stage === 4).slice(0, QUESTIONS_PER_STAGE),
     };
   }, []);
 
@@ -250,7 +251,19 @@ export function GameConceptSection() {
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px", flexWrap: "wrap" }}>
                       <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Boss HP: {bossHp}/100</p>
                       <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Nhiễu loạn: {noise}%</p>
-                      <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Mạng: {playerHp}</p>
+                      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                        <p style={{ margin: 0, fontSize: "12px", fontWeight: 700, color: "#475569" }}>Mạng:</p>
+                        <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                          {Array.from({ length: STARTING_LIVES }).map((_, index) => {
+                            const isAlive = index < playerHp;
+                            return (
+                              <span key={`life-${index}`} style={{ color: isAlive ? "#EF4444" : "#111827", fontSize: "14px", lineHeight: 1 }}>
+                                ❤
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
                     <div style={{ height: "8px", borderRadius: "999px", background: "#E2E8F0", overflow: "hidden" }}>
                       <div style={{ width: `${bossHp}%`, height: "100%", background: "linear-gradient(90deg, #EF4444, #F97316)" }} />
