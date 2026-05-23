@@ -187,9 +187,7 @@ export function GameConceptSection() {
           <span style={{ display: "inline-block", background: "rgba(234,179,8,0.18)", border: "1px solid rgba(234,179,8,0.4)", color: "#0F172A", fontSize: "11px", fontWeight: 700, letterSpacing: "1.2px", textTransform: "uppercase", borderRadius: "999px", padding: "5px 14px", marginBottom: "12px" }}>
             Module game học tập
           </span>
-          <h2 style={{ margin: "0 0 10px", color: "#0F172A", fontSize: "30px", fontWeight: 800 }}>
-            Truth Hunter - Thợ Săn Chân Lý
-          </h2>
+          <h2 style={{ margin: "0 0 10px", color: "#0F172A", fontSize: "30px", fontWeight: 800 }}>Truth Hunter</h2>
           <p style={{ margin: 0, color: "#475569", fontSize: "15px", lineHeight: 1.7, maxWidth: "760px", marginInline: "auto" }}>
             Người chơi vào vai Minh Triết, vượt qua thành phố mạng xã hội để đánh bại các boss thông tin sai lệch bằng nhận thức cảm tính, lý tính và kiểm chứng thực tiễn.
           </p>
